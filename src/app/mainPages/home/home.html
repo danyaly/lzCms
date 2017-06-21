@@ -1,0 +1,51 @@
+<div class="containerBox">
+
+    <div class="left_part">
+        <div class="logo_container"></div>
+        <!-- 导航内容主体 -->
+        <div class="nav_container">
+
+            <h4 class="nav_title">Main</h4>
+
+            <ul class="first_ul">
+                <!-- 一个一级菜单 -->
+                <li class="first_li" [class.active]="showSecond[0]">
+                    <div class="first_title" (click)="showList(0)">
+                        <span class="first_icon glyphicon glyphicon-tag"></span>
+                        <p class="first_name">Settings</p>
+                    </div>
+
+                    <ul class="second_ul" *ngIf="showSecond[0]" [@secondListTrigger]>
+                        <a class="second_li" routerLink="/home/password" routerLinkActive="active">修改密码</a>
+                        <a class="second_li" routerLink="/home/password">修改密码</a>
+                    </ul>
+                </li>
+
+                <!-- 一个一级菜单 -->
+                <li class="first_li" [class.active]="showSecond[1]">
+                    <div class="first_title" (click)="showList(1)">
+                        <span class="first_icon glyphicon glyphicon-tag"></span>
+                        <p class="first_name">Settings</p>
+                    </div>
+
+                    <ul class="second_ul" *ngIf="showSecond[1]" [@secondListTrigger]>
+                        <a class="second_li" routerLink="/home/password">修改密码</a>
+                        <a class="second_li" routerLink="/home/password">修改密码</a>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="right_part">
+        <div class="head_container">
+            <h1>CMS后台管理系统</h1>
+            <div class="user">user</div>
+        </div>
+        <div class="content_container">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>
