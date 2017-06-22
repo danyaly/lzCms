@@ -1,4 +1,15 @@
 <div class="my_container">
     <div class="left_part"></div>
-    <div class="right_part"></div>
+    <div class="right_part">
+        <div class="right_content_container">
+            <p class="title">Sign In</p>
+
+            <p class="input_title">USER NAME</p>
+            <input class="input" type="text" [(ngModel)]="user_name" placeholder="Enter your user name" />
+            <p class="input_title">PASSWORD</p>
+            <input class="input" type="password" [(ngModel)]="password" placeholder="Enter your password" />
+
+            <button class="login_btn" (click)="SignIn()">Sign In</button>
+        </div>
+    </div>
 </div>

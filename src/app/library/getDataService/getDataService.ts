@@ -15,21 +15,37 @@ export class GetDataService {
     }
 
     /*使用Post方法传输数据*/
-    public postData(url: string, data: any){
+    public postData(url: string, data: any, withToken: boolean = true) {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options = new RequestOptions({ headers: headers });
-        const body = JSON.stringify(data);
+
+        let body: any;
+        if (withToken) {
+            body = {
+                data,
+                userid : sessionStorage.getItem('userid'),
+                token : sessionStorage.getItem('token')
+            };
+        }else {
+            body = data;
+        }
+        body = JSON.stringify(body);
         return this.http.post(this.prefix_url + url, body, options).toPromise().then(this.handleSuccess).catch(this.handleError);
     }
 
 
     private handleSuccess(response) {
-        console.log(response);
-        return response.json();
+        try {
+            const res = response.json();
+            return res;
+        }catch (error) {
+            console.log(response);
+            return {};
+        }
     }
 
     private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
+        console.error('An error occurred', error._body); // for demo purposes only
         return Promise.reject(error.message || error);
     }
 }

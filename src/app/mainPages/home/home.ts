@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 
+import { GetDataService } from '../../library/getDataService/getDataService';
+
 @Component({
     templateUrl : './home.html',
     styleUrls : ['./home.scss'],
@@ -18,13 +20,19 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
     ]
 })
 export class HomeComponent{
-    public showSecond = [false,false];
+    public showSecond = [false, false];
+
+    constructor(private dataService: GetDataService) {
+        dataService.postData('/index/index/index',{}).then((res) => {
+            console.log(res);
+        });
+    }
 
     public showList(num){
-        if (this.showSecond[num]){
+        if (this.showSecond[num]) {
             this.showSecond[num] = false;
         }else {
-            this.showSecond.forEach((item,index)=>{
+            this.showSecond.forEach((item, index) => {
                 this.showSecond[index] = false;
             });
             this.showSecond[num] = true;
