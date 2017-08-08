@@ -1,6 +1,6 @@
 {
     "/admin.php/*" : {
-        "target" : "http://localhost/tp5/public/admin.php",
+        "target" : "http://localhost/lzCms_backend/public/admin.php",
         "secure" : false,
         "changeOrigin" : true,
         "pathRewrite" : {

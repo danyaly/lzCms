@@ -9,6 +9,9 @@ import { PagesModule } from '../myPages/pages.module';
 import { LoginComponent } from './login/login';
 import { HomeComponent } from './home/home';
 
+//guard service
+import { AuthGuard } from './base/auth-guard';
+
 
 @NgModule({
     declarations : [
@@ -27,6 +30,8 @@ import { HomeComponent } from './home/home';
 
         PagesModule
     ],
-    providers : []
+    providers : [
+        AuthGuard
+    ]
 })
 export class MainModule{}
