@@ -8,7 +8,15 @@ body{
     width: 100%;
     left: 0;
     top: 0;
+    font-family: "微软雅黑";
 }
 ul{
     list-style: none;
+}
+
+.hidden{
+    display: none;
+}
+.opacity0{
+    opacity: 0;
 }

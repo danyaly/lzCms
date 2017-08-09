@@ -22,10 +22,12 @@ export class GetDataService {
         let body: any;
         if (withToken) {
             body = {
-                data,
                 userid : sessionStorage.getItem('userid'),
                 token : sessionStorage.getItem('token')
             };
+            for(let x in data){
+                body[x] = data[x];
+            }
         }else {
             body = data;
         }

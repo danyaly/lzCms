@@ -158,6 +158,7 @@ $logo_bgcolor : #37414a;
         }
 
         .content_container{
+            position: relative;
             height: calc(100% - #{$head_height});
             padding: 25px;
             overflow: hidden;
