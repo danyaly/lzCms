@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { Routing } from './app.routing';
 import { SubRouting } from './mainPages/main.routing';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { MainModule } from './mainPages/main.module';
 
@@ -19,6 +20,7 @@ import { GetDataService } from './library/getDataService/getDataService';
   imports: [
     BrowserModule,
     HttpModule,
+    NgZorroAntdModule.forRoot(),
     RouterModule.forRoot(Routing),
     RouterModule.forChild(SubRouting),
 
