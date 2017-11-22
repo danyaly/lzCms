@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 import { PagesModule } from '../myPages/pages.module';
+import { SystemModule } from '../systemPages/system.module';
 
 import { LoginComponent } from './login/login';
 import { HomeComponent } from './home/home';
@@ -31,7 +32,8 @@ import { AuthGuard } from './base/auth-guard';
         FormsModule,
         BrowserAnimationsModule,
 
-        PagesModule
+        PagesModule,
+        SystemModule
     ],
     providers : [
         AuthGuard

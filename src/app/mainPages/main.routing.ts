@@ -5,6 +5,8 @@ import { PasswordComponent } from '../myPages/password/password';
 
 import { AuthGuard } from './base/auth-guard';
 
+import { SystemRouting } from '../systemPages/system.routing';
+
 export let SubRouting = [
     {
         path : 'home',
@@ -21,7 +23,8 @@ export let SubRouting = [
                 /*修改密码页*/
                 path : 'password',
                 component : PasswordComponent
-            }
+            },
+            ...SystemRouting
         ]
     }
 ];
