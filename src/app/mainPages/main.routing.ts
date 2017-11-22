@@ -1,5 +1,8 @@
 import { HomeComponent } from './home/home';
+
+import { IndexComponent } from './index/index';
 import { PasswordComponent } from '../myPages/password/password';
+
 import { AuthGuard } from './base/auth-guard';
 
 export let SubRouting = [
@@ -9,6 +12,11 @@ export let SubRouting = [
         canActivate : [AuthGuard],
         canActivateChild : [AuthGuard],
         children : [
+            {
+                /*首页*/
+                path : '',
+                component : IndexComponent
+            },
             {
                 /*修改密码页*/
                 path : 'password',

@@ -8,6 +8,7 @@ import { PagesModule } from '../myPages/pages.module';
 
 import { LoginComponent } from './login/login';
 import { HomeComponent } from './home/home';
+import { IndexComponent } from './index/index';
 
 //guard service
 import { AuthGuard } from './base/auth-guard';
@@ -16,11 +17,13 @@ import { AuthGuard } from './base/auth-guard';
 @NgModule({
     declarations : [
         LoginComponent,
-        HomeComponent
+        HomeComponent,
+        IndexComponent
     ],
     exports : [
         LoginComponent,
-        HomeComponent
+        HomeComponent,
+        IndexComponent
     ],
     imports : [
         CommonModule,
