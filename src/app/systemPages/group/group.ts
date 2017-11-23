@@ -14,7 +14,6 @@ export class GroupComponent {
         this.dataService.getData("/system/GroupCtl/getGroupList").then(res => {
             if(res.status == "success"){
                 this.data = res.data;
-                console.log(this.data);
             }else{
                 // todo 获取列表失败
             }

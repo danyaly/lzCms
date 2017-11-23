@@ -22,11 +22,7 @@ import { GetDataService } from '../../library/getDataService/getDataService';
 export class HomeComponent{
     public showSecond = [false, false];
 
-    constructor(private dataService: GetDataService) {
-        dataService.postData('/index/index/index',{}).then((res) => {
-            console.log(res);
-        });
-    }
+    constructor(private dataService: GetDataService) {}
 
     public showList(num){
         if (this.showSecond[num]) {
