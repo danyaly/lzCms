@@ -19,7 +19,7 @@ export class GetDataService {
     public getData(url: string) {
         const headers = new Headers({ 'token' : sessionStorage.getItem('token') });
         const options = new RequestOptions({ headers: headers });
-        return this.http.get(this.prefix_url + url , options).toPromise().then(this.handleSuccess).catch(this.handleError);
+        return this.http.get(this.prefix_url + url , options).toPromise().then(this.handleSuccess.bind(this)).catch(this.handleError);
     }
 
     /*使用Post方法传输数据*/
@@ -36,9 +36,7 @@ export class GetDataService {
         try {
             const res = response.json();
             if(res.status == "tokenError"){
-                this._notification.create('error', res.message,'',{
-                    nzDuration : 1.5
-                });
+                this._notification.error(res.message,'',{nzDuration: 1000});
                 setTimeout(()=>{
                     this.router.navigate(['/']);
                 },1000);
