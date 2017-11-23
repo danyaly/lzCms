@@ -20,3 +20,19 @@ ul{
 .opacity0{
     opacity: 0;
 }
+
+
+//面包屑导航
+.page_location{
+    height: 25px;
+    line-height: 15px;
+    padding: 10px 0 0 10px;
+
+    nz-breadcrumb{
+        display: inline;
+    }
+
+    .page_location_title{
+        margin-right: 10px;
+    }
+}
