@@ -21,7 +21,6 @@ export class LoginComponent {
         };
         this.dataService.postData('/index/index/login', data, false).then(res => {
             if (res.status === 0) {
-                sessionStorage.setItem('userid', res.data.id);
                 sessionStorage.setItem('token', res.data.token);
                 this.router.navigate(['/home']);
             }else {

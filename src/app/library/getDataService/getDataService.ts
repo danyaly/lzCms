@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -7,38 +9,40 @@ import 'rxjs/add/operator/toPromise';
 export class GetDataService {
     private prefix_url = '/admin.php';
 
-    constructor(private http: Http) {}
+    constructor(
+        private http: Http,
+        private _notification: NzNotificationService,
+        private router: Router
+    ) {}
 
     /*使用Get方式传输数据*/
     public getData(url: string) {
-        return this.http.get(this.prefix_url + url).toPromise().then(this.handleSuccess).catch(this.handleError);
+        const headers = new Headers({ 'token' : sessionStorage.getItem('token') });
+        const options = new RequestOptions({ headers: headers });
+        return this.http.get(this.prefix_url + url , options).toPromise().then(this.handleSuccess).catch(this.handleError);
     }
 
     /*使用Post方法传输数据*/
     public postData(url: string, data: any, withToken: boolean = true) {
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({ 'token' : sessionStorage.getItem('token') });
         const options = new RequestOptions({ headers: headers });
 
-        let body: any;
-        if (withToken) {
-            body = {
-                userid : sessionStorage.getItem('userid'),
-                token : sessionStorage.getItem('token')
-            };
-            for(let x in data){
-                body[x] = data[x];
-            }
-        }else {
-            body = data;
-        }
-        body = JSON.stringify(body);
-        return this.http.post(this.prefix_url + url, body, options).toPromise().then(this.handleSuccess).catch(this.handleError);
+        let body = JSON.stringify(data);
+        return this.http.post(this.prefix_url + url, body, options).toPromise().then(this.handleSuccess.bind(this)).catch(this.handleError);
     }
 
 
     private handleSuccess(response) {
         try {
             const res = response.json();
+            if(res.status == "tokenError"){
+                this._notification.create('error', res.message,'',{
+                    nzDuration : 1.5
+                });
+                setTimeout(()=>{
+                    this.router.navigate(['/']);
+                },1000);
+            }
             return res;
         }catch (error) {
             console.log(response);
