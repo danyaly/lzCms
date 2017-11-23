@@ -4,23 +4,26 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
-import { GroupModule } from './group/group.module';
+import { GroupComponent } from './group';
+import { CreateComponent } from './create/create';
 
 @NgModule({
     declarations : [
-        
+        GroupComponent,
+        CreateComponent
     ],
     exports : [
-        
+        GroupComponent
+    ],
+    entryComponents : [
+        CreateComponent
     ],
     imports : [
         CommonModule,
         FormsModule,
         BrowserAnimationsModule,
-        NgZorroAntdModule,
-
-        GroupModule
+        NgZorroAntdModule
     ],
     providers : []
 })
-export class SystemModule{}
+export class GroupModule{}

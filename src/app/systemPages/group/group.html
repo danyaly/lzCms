@@ -6,14 +6,20 @@
             <nz-breadcrumb-item>角色管理</nz-breadcrumb-item>
         </nz-breadcrumb>
     </div>
-    <div class="group_table">
-        <nz-table #nzTable [nzDataSource]="data" [nzPageSize]="10">
-            <thead nz-thead>
-                <tr>
-                    <th nz-th><span>角色名</span></th>
-                    <th nz-th><span>操作</span></th>
-                </tr>
-            </thead>
+    <div class="operation_container">
+        <button nz-button [nzType]="'primary'" (click)="showAdd()">新增</button>
+    </div>
+    <div class="normal_table_container" #normalTableContainer>
+        <nz-table #nzTable [nzDataSource]="data" [nzPageSize]="10" [nzShowTotal]="true" 
+             [nzScroll]="getScrollStyle(normalTableContainer)" [nzLoading]="isLoading">
+            <ng-template #nzFixedHeader>
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th><span>角色名</span></th>
+                        <th nz-th><span>操作</span></th>
+                    </tr>
+                </thead>
+            </ng-template>
             <tbody nz-tbody>
                 <tr nz-tbody-tr *ngFor="let item of nzTable.data">
                     <td nz-td><a>{{item.name}}</a></td>
@@ -27,6 +33,6 @@
                     </td>
                 </tr>
             </tbody>
-          </nz-table>
+        </nz-table>
     </div>
 </div>
