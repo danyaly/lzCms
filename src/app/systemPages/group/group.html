@@ -25,10 +25,9 @@
                     <td nz-td><a>{{item.name}}</a></td>
                     <td nz-td>
                         <span>
-                            <a>编辑</a>
+                            <a class="operator">编辑</a>
                             <span nz-table-divider></span>
-                            <a>删除</a>
-                            <span nz-table-divider></span>
+                            <a class="operator" (click)="deleteGroup(item.id)">删除</a>
                         </span>
                     </td>
                 </tr>

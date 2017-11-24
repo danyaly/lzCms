@@ -55,6 +55,10 @@ ul{
     .tbody{
         height: calc(100% - 100px);
         overflow-y: scroll;
+
+        .operator{
+            color: #333333;
+        }
     }
 }
 
@@ -71,4 +75,13 @@ ul{
 .form_single_line{
     height: 28px;
     line-height: 28px;
+}
+
+//输入框错误提示
+nz-input.error input{
+    border: 1px solid red;
+    box-shadow: 0 0 5px red;
+}
+.error_tip{
+    color: red;
 }

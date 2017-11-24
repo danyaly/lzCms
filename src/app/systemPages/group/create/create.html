@@ -3,8 +3,12 @@
         <div nz-row class="form_single_line">
             <div nz-col [nzSpan]="4" class="form_single_line_title">角色名：</div>
             <div nz-col [nzSpan]="20">
-                <nz-input [(ngModel)]="group_name" [nzPlaceHolder]="'请输入角色名称'"></nz-input>
+                <nz-input [(ngModel)]="group_name" (nzFocus)="error_tip=''" [class.error]="error_tip" [nzPlaceHolder]="'请输入角色名称'"></nz-input>
             </div>
+        </div>
+        <div nz-row class="form_single_line">
+            <div nz-col [nzSpan]="4"></div>
+            <div nz-col [nzSpan]="20" class="error_tip">{{error_tip}}</div>
         </div>
     </div>
     <div class="customize-footer">
