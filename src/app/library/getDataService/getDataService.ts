@@ -19,16 +19,18 @@ export class GetDataService {
     public getData(url: string) {
         const headers = new Headers({ 'token' : sessionStorage.getItem('token') });
         const options = new RequestOptions({ headers: headers });
-        return this.http.get(this.prefix_url + url , options).toPromise().then(this.handleSuccess.bind(this)).catch(this.handleError);
+        return this.http.get(this.prefix_url + url , options).toPromise().then(this.handleSuccess.bind(this))
+            .catch(this.handleError.bind(this));
     }
 
     /*使用Post方法传输数据*/
-    public postData(url: string, data: any, withToken: boolean = true) {
+    public postData(url: string, data: any, withToken: boolean = true):any {
         const headers = new Headers({ 'token' : sessionStorage.getItem('token') });
         const options = new RequestOptions({ headers: headers });
 
         let body = JSON.stringify(data);
-        return this.http.post(this.prefix_url + url, body, options).toPromise().then(this.handleSuccess.bind(this)).catch(this.handleError);
+        return this.http.post(this.prefix_url + url, body, options).toPromise().then(this.handleSuccess.bind(this))
+            .catch(this.handleError.bind(this));
     }
 
 
@@ -49,7 +51,7 @@ export class GetDataService {
     }
 
     private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error._body); // for demo purposes only
+        this._notification.error("后台发生错误，请联系管理员",'错误码：' + error.status,{nzDuration: 4000});
         return Promise.reject(error.message || error);
     }
 }
