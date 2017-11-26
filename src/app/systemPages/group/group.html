@@ -27,6 +27,8 @@
                         <span>
                             <a class="operator">编辑</a>
                             <span nz-table-divider></span>
+                            <a class="operator" (click)="asignMenu(item.id,item.menus)">配置权限</a>
+                            <span nz-table-divider></span>
                             <a class="operator" (click)="deleteGroup(item.id)">删除</a>
                         </span>
                     </td>

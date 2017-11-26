@@ -1,0 +1,47 @@
+<div class="menu_container">
+    <nz-table #nzTable [nzDataSource]="data" [nzPageSize]="10" [nzShowTotal]="true" 
+        [nzScroll]="{y:400}" [nzLoading]="isLoading">
+        <ng-template #nzFixedHeader>
+            <thead nz-thead>
+                <tr>
+                    <th nz-th [nzCheckbox]="true"></th>
+                    <th nz-th><span>菜单名</span></th>
+                    <th nz-th><span>链接</span></th>
+                    <th nz-th><span>操作</span></th>
+                </tr>
+            </thead>
+        </ng-template>
+        <tbody nz-tbody>
+            <ng-template ngFor let-data [ngForOf]="nzTable.data">
+                <ng-template ngFor let-item [ngForOf]="expandDataCache[data.id]">
+                    <tr nz-tbody-tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)">
+                        <td nz-td [nzCheckbox]="true">
+                            <label nz-checkbox [nzDisabled]="item.disabled" [(ngModel)]="item.checked">
+                            </label>
+                        </td>
+                        <td nz-td>
+                            <nz-row-indent [nzIndentSize]="item.level"></nz-row-indent>
+                            <nz-row-expand-icon [(nzExpand)]="item.expand" (nzExpandChange)="collapse(expandDataCache[data.id],item,$event)" [nzShowExpand]="!!item.children"></nz-row-expand-icon>
+                            {{item.name}}
+                        </td>
+                        <td nz-td>{{item.link}}</td>
+                        <td nz-td>
+                            <a class="operator">编辑</a>
+                            <span nz-table-divider></span>
+                            <a class="operator" (click)="deleteMenu(item.id)">删除</a>
+                        </td>
+                    </tr>
+                </ng-template>
+            </ng-template>
+        </tbody>
+    </nz-table>
+
+    <div class="customize-footer">
+        <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleSave($event)" [nzLoading]="saveLoading">
+            保 存
+        </button>
+        <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+            返 回
+        </button>
+    </div>
+</div>

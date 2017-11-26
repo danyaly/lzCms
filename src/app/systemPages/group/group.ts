@@ -5,6 +5,7 @@ import { NzModalService , NzMessageService } from 'ng-zorro-antd';
 import { GetDataService } from '../../library/getDataService/getDataService';
 
 import { CreateComponent } from './create/create';
+import { MenuComponent } from './menu/menu';
 
 @Component({
     templateUrl : 'group.html',
@@ -65,6 +66,26 @@ export class GroupComponent {
             },
             footer : false,
             componentParams: {}
+        });
+        subscription.subscribe(result => {
+            
+        })
+    }
+
+    /*显示配置权限组件*/
+    asignMenu(groupId,menus){
+        const subscription = this.modalService.open({
+            title : '配置权限',
+            content : MenuComponent,
+            width : 1000,
+            onOk : () => {
+                this.getData();
+            },
+            footer : false,
+            componentParams: {
+                groupId : groupId,
+                menus : menus
+            }
         });
         subscription.subscribe(result => {
             
