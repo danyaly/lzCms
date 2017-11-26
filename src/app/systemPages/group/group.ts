@@ -64,12 +64,10 @@ export class GroupComponent {
                 this.getData();
             },
             footer : false,
-            componentParams: {
-                name: '测试渲染Component'
-            }
+            componentParams: {}
         });
         subscription.subscribe(result => {
-            console.log(result);
+            
         })
     }
 

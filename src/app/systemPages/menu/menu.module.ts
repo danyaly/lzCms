@@ -4,27 +4,26 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
-import { GroupModule } from './group/group.module';
-import { UserModule } from './user/user.module';
-import { MenuModule } from './menu/menu.module';
+import { MenuComponent } from './menu';
+import { CreateComponent } from './create/create';
 
 @NgModule({
     declarations : [
-        
+        MenuComponent,
+        CreateComponent
     ],
     exports : [
-        
+        MenuComponent
+    ],
+    entryComponents : [
+        CreateComponent
     ],
     imports : [
         CommonModule,
         FormsModule,
         BrowserAnimationsModule,
-        NgZorroAntdModule,
-
-        GroupModule,
-        UserModule,
-        MenuModule
+        NgZorroAntdModule
     ],
     providers : []
 })
-export class SystemModule{}
+export class MenuModule{}

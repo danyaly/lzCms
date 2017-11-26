@@ -58,18 +58,16 @@ export class UserComponent {
     /*显示创建组件*/
     showAdd(){
         const subscription = this.modalService.open({
-            title : '新建角色',
+            title : '新建用户',
             content : CreateComponent,
             onOk : () => {
                 this.getData();
             },
             footer : false,
-            componentParams: {
-                name: '测试渲染Component'
-            }
+            componentParams: {}
         });
         subscription.subscribe(result => {
-            console.log(result);
+            
         })
     }
 
