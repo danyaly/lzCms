@@ -9,41 +9,15 @@
 
             <ul class="first_ul">
                 <!-- 一个一级菜单 -->
-                <li class="first_li" [class.active]="showSecond[0]">
-                    <div class="first_title" (click)="showList(0)">
+                <li class="first_li" [class.active]="showSecond[i]" *ngFor="let menu of menus;let i=index">
+                    <div class="first_title" (click)="showList(i,menu.link)">
                         <span class="first_icon glyphicon glyphicon-tag"></span>
-                        <p class="first_name">仪表盘</p>
+                        <p class="first_name">{{menu.name}}</p>
                     </div>
 
-                    <ul class="second_ul" *ngIf="showSecond[0]" [@secondListTrigger]>
-                        <a class="second_li" routerLink="/home" routerLinkActive="active">首页</a>
-                    </ul>
-                </li>
-
-                <!-- 系统设置 -->
-                <li class="first_li" [class.active]="showSecond[1]">
-                    <div class="first_title" (click)="showList(1)">
-                        <span class="first_icon glyphicon glyphicon-tag"></span>
-                        <p class="first_name">系统设置</p>
-                    </div>
-
-                    <ul class="second_ul" *ngIf="showSecond[1]" [@secondListTrigger]>
-                        <a class="second_li" routerLink="/home/group" routerLinkActive="active">角色管理</a>
-                        <a class="second_li" routerLink="/home/user" routerLinkActive="active">用户管理</a>
-                        <a class="second_li" routerLink="/home/menu" routerLinkActive="active">菜单管理</a>
-                    </ul>
-                </li>
-
-                <!-- 一个一级菜单 -->
-                <li class="first_li" [class.active]="showSecond[2]">
-                    <div class="first_title" (click)="showList(2)">
-                        <span class="first_icon glyphicon glyphicon-tag"></span>
-                        <p class="first_name">Settings</p>
-                    </div>
-
-                    <ul class="second_ul" *ngIf="showSecond[2]" [@secondListTrigger]>
-                        <a class="second_li" routerLink="/home/password">修改密码</a>
-                        <a class="second_li" routerLink="/home/password">修改密码</a>
+                    <ul class="second_ul" *ngIf="menu.children && showSecond[i]" [@secondListTrigger]>
+                        <a class="second_li" routerLink="{{'/home' + item.link}}" routerLinkActive="active"
+                             *ngFor="let item of menu.children">{{item.name}}</a>
                     </ul>
                 </li>
             </ul>
