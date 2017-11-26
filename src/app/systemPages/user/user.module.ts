@@ -6,17 +6,20 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { UserComponent } from './user';
 import { CreateComponent } from './create/create';
+import { GroupComponent } from './group/group';
 
 @NgModule({
     declarations : [
         UserComponent,
-        CreateComponent
+        CreateComponent,
+        GroupComponent
     ],
     exports : [
         UserComponent
     ],
     entryComponents : [
-        CreateComponent
+        CreateComponent,
+        GroupComponent
     ],
     imports : [
         CommonModule,

@@ -1,0 +1,20 @@
+<div class="create_container">
+        <div class="content_container">
+            <div nz-row class="form_single_line">
+                <div nz-col [nzSpan]="3" class="form_single_line_title">选择角色：</div>
+                <div nz-col [nzSpan]="15">
+                    <nz-select style="width: 120px;" [(ngModel)]="user.group">
+                        <nz-option *ngFor="let item of groups" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                </div>
+            </div>
+        </div>
+        <div class="customize-footer">
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleSave($event)" [nzLoading]="isLoading">
+                保 存
+            </button>
+            <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+                返 回
+            </button>
+        </div>
+    </div>

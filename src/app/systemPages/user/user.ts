@@ -5,6 +5,7 @@ import { NzModalService , NzMessageService } from 'ng-zorro-antd';
 import { GetDataService } from '../../library/getDataService/getDataService';
 
 import { CreateComponent } from './create/create';
+import { GroupComponent } from './group/group';
 
 @Component({
     templateUrl : 'user.html',
@@ -36,7 +37,7 @@ export class UserComponent {
     }
 
     /*删除一个角色*/
-    deleteGroup(userId){
+    deleteUser(userId){
         this.modalService.confirm({
             title  : '您是否确认要删除这个用户',
             content: '<b>删除后已绑定该角色的用户将失去所有权限，需重新分配角色</b>',
@@ -65,6 +66,24 @@ export class UserComponent {
             },
             footer : false,
             componentParams: {}
+        });
+        subscription.subscribe(result => {
+            
+        })
+    }
+
+    /*显示配置角色组件*/
+    editGroup(item){
+        const subscription = this.modalService.open({
+            title : '分配角色',
+            content : GroupComponent,
+            onOk : () => {
+                this.getData();
+            },
+            footer : false,
+            componentParams: {
+                user : item
+            }
         });
         subscription.subscribe(result => {
             

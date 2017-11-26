@@ -53,11 +53,11 @@ export class MenuComponent {
         })
     }
 
-    /*删除一个角色*/
+    /*删除一个菜单*/
     deleteMenu(menuId){
         this.modalService.confirm({
             title  : '您是否确认要删除这个菜单',
-            content: '',
+            content: '注意：子菜单也会一并删除',
             showConfirmLoading: true,
             onOk: ()=>{
                 this.dataService.postData("/system/MenuCtl/deleteMenu",{id:menuId}).then(res => {

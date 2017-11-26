@@ -27,7 +27,9 @@
                         <span>
                             <a class="operator">编辑</a>
                             <span nz-table-divider></span>
-                            <a class="operator" (click)="deleteGroup(item.id)">删除</a>
+                            <a class="operator" (click)="editGroup(item)">分配角色</a>
+                            <span nz-table-divider></span>
+                            <a class="operator" (click)="deleteUser(item.id)">删除</a>
                         </span>
                     </td>
                 </tr>
