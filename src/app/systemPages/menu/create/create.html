@@ -16,10 +16,23 @@
         </div>
         <div nz-row class="form_single_line">
             <div nz-col [nzSpan]="3" class="form_single_line_title">上级菜单：</div>
-            <div nz-col [nzSpan]="15">
+            <div nz-col [nzSpan]="6">
                 <nz-select style="width: 120px;" [(ngModel)]="data.pid">
                     <nz-option *ngFor="let item of firstLevelList" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                 </nz-select>
+            </div>
+
+            <div nz-col [nzSpan]="3" [nzPush]="1" class="form_single_line_title textRight">排序：</div>
+            <div nz-col [nzSpan]="4" [nzPush]="1">
+                <nz-input-number [(ngModel)]="data.orders" [nzMin]="0" [nzMax]="1000" [nzStep]="1"></nz-input-number>
+            </div>
+            <div nz-col [nzSpan]="7" [nzPush]="1">注：数值越小越靠前</div>
+        </div>
+
+        <div nz-row class="form_single_line">
+            <div nz-col [nzSpan]="3" class="form_single_line_title">小图标：</div>
+            <div nz-col [nzSpan]="15">
+                <nz-input [(ngModel)]="data.icon" [nzPlaceHolder]="'请输入Glyphicons图标'"></nz-input>
             </div>
         </div>
     </div>

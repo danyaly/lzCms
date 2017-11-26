@@ -1,23 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { trigger,transition,style,animate,state } from '@angular/animations';
 import { NzModalSubject , NzMessageService } from 'ng-zorro-antd';
 
 import { GetDataService } from '../../../library/getDataService/getDataService';
 
 @Component({
-    templateUrl : 'create.html',
-    styleUrls : ['create.scss'],
+    templateUrl : 'edit.html',
+    styleUrls : ['edit.scss'],
 })
-export class CreateComponent {
+export class EditComponent {
+    @Input() menu;
 
     public isLoading = false;
-    public data = {
-        name : "",
-        link : "",
-        pid : 0,
-        orders : 0,
-        icon : ""
-    }
     public error = {
         name_error : "",
         link_error : ""
@@ -53,22 +47,23 @@ export class CreateComponent {
     }
 
     handleSave($event){
-        this.data.name = this.data.name.replace(/\s+/g,"");
-        if(!this.data.name){
+        this.menu.name = this.menu.name.replace(/\s+/g,"");
+        if(!this.menu.name){
             this.error.name_error = "请填写菜单名";
             return ;
         }
         this.isLoading = true;
-        this.dataService.postData("/system/MenuCtl/addMenu",{
-            name : this.data.name,
-            link : this.data.link,
-            pid : this.data.pid,
-            orders : this.data.orders,
-            icon : this.data.icon
+        this.dataService.postData("/system/MenuCtl/editMenu",{
+            id : this.menu.id,
+            name : this.menu.name,
+            link : this.menu.link,
+            pid : this.menu.pid,
+            orders : this.menu.orders,
+            icon : this.menu.icon
         }).then(res => {
             this.isLoading = false;
             if(res.status == "success"){
-                this._message.success("创建新菜单成功");
+                this._message.success("更新菜单成功");
                 this.subject.destroy('onOk');
             }else{
                 this._message.error(res.msg);

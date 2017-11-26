@@ -6,17 +6,20 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { MenuComponent } from './menu';
 import { CreateComponent } from './create/create';
+import { EditComponent } from './edit/edit';
 
 @NgModule({
     declarations : [
         MenuComponent,
-        CreateComponent
+        CreateComponent,
+        EditComponent
     ],
     exports : [
         MenuComponent
     ],
     entryComponents : [
-        CreateComponent
+        CreateComponent,
+        EditComponent
     ],
     imports : [
         CommonModule,

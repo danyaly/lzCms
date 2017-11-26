@@ -4,14 +4,11 @@
         <div class="logo_container"></div>
         <!-- 导航内容主体 -->
         <div class="nav_container">
-
-            <h4 class="nav_title">Main</h4>
-
             <ul class="first_ul">
                 <!-- 一个一级菜单 -->
                 <li class="first_li" [class.active]="showSecond[i]" *ngFor="let menu of menus;let i=index">
                     <div class="first_title" (click)="showList(i,menu.link)">
-                        <span class="first_icon glyphicon glyphicon-tag"></span>
+                        <span class="first_icon glyphicon glyphicon-{{menu.icon}}"></span>
                         <p class="first_name">{{menu.name}}</p>
                     </div>
 

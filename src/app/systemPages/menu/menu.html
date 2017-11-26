@@ -15,28 +15,30 @@
             <ng-template #nzFixedHeader>
                 <thead nz-thead>
                     <tr>
-                        <th nz-th><span>菜单名</span></th>
-                        <th nz-th><span>链接</span></th>
-                        <th nz-th><span>操作</span></th>
+                        <th nz-th [nzWidth]="'30%'">菜单名</th>
+                        <th nz-th [nzWidth]="'20%'">链接</th>
+                        <th nz-th [nzWidth]="'20%'">排序</th>
+                        <th nz-th [nzWidth]="'30%'">操作</th>
                     </tr>
                 </thead>
             </ng-template>
             <tbody nz-tbody>
                 <ng-template ngFor let-data [ngForOf]="nzTable.data">
                     <ng-template ngFor let-item [ngForOf]="expandDataCache[data.id]">
-                      <tr nz-tbody-tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)">
-                        <td nz-td>
-                            <nz-row-indent [nzIndentSize]="item.level"></nz-row-indent>
-                            <nz-row-expand-icon [(nzExpand)]="item.expand" (nzExpandChange)="collapse(expandDataCache[data.id],item,$event)" [nzShowExpand]="!!item.children"></nz-row-expand-icon>
-                            {{item.name}}
-                        </td>
-                        <td nz-td>{{item.link}}</td>
-                        <td nz-td>
-                            <a class="operator">编辑</a>
-                            <span nz-table-divider></span>
-                            <a class="operator" (click)="deleteMenu(item.id)">删除</a>
-                        </td>
-                      </tr>
+                        <tr nz-tbody-tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)">
+                            <td nz-td>
+                                <nz-row-indent [nzIndentSize]="item.level"></nz-row-indent>
+                                <nz-row-expand-icon [(nzExpand)]="item.expand" (nzExpandChange)="collapse(expandDataCache[data.id],item,$event)" [nzShowExpand]="!!item.children"></nz-row-expand-icon>
+                                {{item.name}}
+                            </td>
+                            <td nz-td>{{item.link}}</td>
+                            <td nz-td>{{item.orders}}</td>
+                            <td nz-td>
+                                <a class="operator" (click)="editMenu(item)">编辑</a>
+                                <span nz-table-divider></span>
+                                <a class="operator" (click)="deleteMenu(item.id)">删除</a>
+                            </td>
+                        </tr>
                     </ng-template>
                 </ng-template>
             </tbody>

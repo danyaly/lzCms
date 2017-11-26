@@ -5,6 +5,7 @@ import { NzModalService , NzMessageService } from 'ng-zorro-antd';
 import { GetDataService } from '../../library/getDataService/getDataService';
 
 import { CreateComponent } from './create/create';
+import { EditComponent } from 'app/systemPages/menu/edit/edit';
 
 @Component({
     templateUrl : 'menu.html',
@@ -84,6 +85,25 @@ export class MenuComponent {
             },
             footer : false,
             componentParams: {}
+        });
+        subscription.subscribe(result => {
+            
+        })
+    }
+
+    /*显示编辑组件*/
+    editMenu(item){
+        const subscription = this.modalService.open({
+            title : '编辑菜单',
+            content : EditComponent,
+            width : 600,
+            onOk : () => {
+                this.getData();
+            },
+            footer : false,
+            componentParams: {
+                menu : item
+            }
         });
         subscription.subscribe(result => {
             
