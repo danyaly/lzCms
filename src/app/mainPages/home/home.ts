@@ -24,6 +24,10 @@ export class HomeComponent{
 
     constructor(private dataService: GetDataService) {}
 
+    public getMenu(){
+        
+    }
+
     public showList(num){
         if (this.showSecond[num]) {
             this.showSecond[num] = false;
