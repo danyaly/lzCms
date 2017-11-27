@@ -3,7 +3,7 @@
             <div nz-row class="form_single_line">
                 <div nz-col [nzSpan]="3" class="form_single_line_title">选择角色：</div>
                 <div nz-col [nzSpan]="15">
-                    <nz-select style="width: 120px;" [(ngModel)]="user.group">
+                    <nz-select style="width: 120px;" [(ngModel)]="data.group">
                         <nz-option *ngFor="let item of groups" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                     </nz-select>
                 </div>

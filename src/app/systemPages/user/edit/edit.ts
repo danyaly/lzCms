@@ -5,15 +5,17 @@ import { NzModalSubject , NzMessageService } from 'ng-zorro-antd';
 import { GetDataService } from '../../../library/getDataService/getDataService';
 
 @Component({
-    templateUrl : 'group.html',
-    styleUrls : ['group.scss'],
+    templateUrl : 'edit.html',
+    styleUrls : ['edit.scss'],
 })
-export class GroupComponent {
+export class EditComponent {
     @Input() user;
 
     public data:any = {};
-    public groups = [];
     public isLoading = false;
+    public error = {
+        name : ""
+    }
 
     constructor(
         private dataService: GetDataService,
@@ -25,23 +27,6 @@ export class GroupComponent {
         for(let x in this.user){
             this.data[x] = this.user[x];
         }
-        this.data.group = this.data.group ? this.data.group : 0;
-        this.getGroup();
-    }
-
-    getGroup(){
-        this.dataService.getData("/system/GroupCtl/getGroupList").then((res:any) => {
-            this.isLoading = false;
-            if(res.status == "success"){
-                this.groups = res.data;
-                this.groups.unshift({
-                    id : 0,
-                    name : "无"
-                })
-            }else{
-                this._message.error(res.message);
-            }
-        })
     }
 
     handleCancel($event){
@@ -49,19 +34,24 @@ export class GroupComponent {
     }
 
     handleSave($event){
+        this.data.name = this.data.name.replace(/\s+/g,"");
+        if(!this.data.name){
+            this.error.name = "请填写用户名";
+            return ;
+        }
         if(JSON.stringify(this.user) == JSON.stringify(this.data)){
             this._message.error("没有数据被更新");
             return ;
         }
 
         this.isLoading = true;
-        this.dataService.postData("/system/UserCtl/editUserGroup",{
+        this.dataService.postData("/system/UserCtl/editUser",{
             id : this.data.id,
-            groupId : this.data.group
+            name : this.data.name
         }).then(res => {
             this.isLoading = false;
             if(res.status == "success"){
-                this._message.success("配置用户角色成功");
+                this._message.success("创建新用户成功");
                 this.subject.destroy('onOk');
             }else{
                 this._message.error(res.msg);

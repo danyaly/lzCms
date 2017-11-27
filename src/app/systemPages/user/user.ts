@@ -6,6 +6,7 @@ import { GetDataService } from '../../library/getDataService/getDataService';
 
 import { CreateComponent } from './create/create';
 import { GroupComponent } from './group/group';
+import { EditComponent } from './edit/edit';
 
 @Component({
     templateUrl : 'user.html',
@@ -36,11 +37,34 @@ export class UserComponent {
         })
     }
 
-    /*删除一个角色*/
+    /*改变一个角色的状态*/
+    changeUserMode(user){
+        this.modalService.confirm({
+            title  : '您是否确认要' + (user.deleted ? "恢复" : "禁用") + '这个用户',
+            content: '',
+            showConfirmLoading: true,
+            onOk: ()=>{
+                this.dataService.postData("/system/UserCtl/changeUserMode",{
+                    id : user.id,
+                    deleted : user.deleted ? 0 : 1
+                }).then(res => {
+                    if(res.status == "success"){
+                        this._message.success( (user.deleted ? "恢复" : "禁用") + "角色成功",{nzDuration : 1500});
+                        this.getData();
+                    }else{
+                        this._message.error(res.msg,{nzDuration : 1500});
+                    }
+                })
+            },
+            onCancel() {}
+        });
+    }
+
+    /*删除一个用户*/
     deleteUser(userId){
         this.modalService.confirm({
             title  : '您是否确认要删除这个用户',
-            content: '<b>删除后已绑定该角色的用户将失去所有权限，需重新分配角色</b>',
+            content: '<b>此功能将永久删除该用户，请谨慎操作</b>',
             showConfirmLoading: true,
             onOk: ()=>{
                 this.dataService.postData("/system/UserCtl/deleteUser",{id:userId}).then(res => {
@@ -77,6 +101,24 @@ export class UserComponent {
         const subscription = this.modalService.open({
             title : '分配角色',
             content : GroupComponent,
+            onOk : () => {
+                this.getData();
+            },
+            footer : false,
+            componentParams: {
+                user : item
+            }
+        });
+        subscription.subscribe(result => {
+            
+        })
+    }
+
+    /*显示编辑角色组件*/
+    editUser(item){
+        const subscription = this.modalService.open({
+            title : '编辑用户',
+            content : EditComponent,
             onOk : () => {
                 this.getData();
             },

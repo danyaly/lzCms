@@ -16,9 +16,10 @@
                 <thead nz-thead>
                     <tr>
                         <th nz-th [nzWidth]="'20%'"><span>用户名</span></th>
-                        <th nz-th [nzWidth]="'20%'"><span>创建时间</span></th>
+                        <th nz-th [nzWidth]="'15%'"><span>创建时间</span></th>
+                        <th nz-th [nzWidth]="'15%'"><span>是否有效</span></th>
                         <th nz-th [nzWidth]="'20%'"><span>所属角色</span></th>
-                        <th nz-th [nzWidth]="'20%'"><span>操作</span></th>
+                        <th nz-th [nzWidth]="'30%'"><span>操作</span></th>
                     </tr>
                 </thead>
             </ng-template>
@@ -26,12 +27,15 @@
                 <tr nz-tbody-tr *ngFor="let item of nzTable.data">
                     <td nz-td>{{item.name}}</td>
                     <td nz-td>{{item.create_time*1000 | date: 'yyyy-MM-dd'}}</td>
+                    <td nz-td>{{item.deleted ? '无效' : '有效'}}</td>
                     <td nz-td>{{item.groupName ? item.groupName : '无'}}</td>
                     <td nz-td>
                         <span>
-                            <a class="operator">编辑</a>
+                            <a class="operator" (click)="editUser(item)">编辑</a>
                             <span nz-table-divider></span>
                             <a class="operator" (click)="editGroup(item)">分配角色</a>
+                            <span nz-table-divider></span>
+                            <a class="operator" (click)="changeUserMode(item)">{{item.deleted ? '恢复' : '禁用'}}</a>
                             <span nz-table-divider></span>
                             <a class="operator" (click)="deleteUser(item.id)">删除</a>
                         </span>
