@@ -1,6 +1,7 @@
 import { GroupComponent } from './group/group';
 import { UserComponent } from './user/user';
 import { MenuComponent } from './menu/menu';
+import { PasswordComponent } from './password/password';
 
 export let SystemRouting = [
     {
@@ -17,5 +18,10 @@ export let SystemRouting = [
         /*菜单管理*/
         path : 'menu',
         component : MenuComponent
+    },
+    {
+        /*修改密码*/
+        path : 'password',
+        component : PasswordComponent
     }
 ];

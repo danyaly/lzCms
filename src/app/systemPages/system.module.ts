@@ -7,6 +7,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { GroupModule } from './group/group.module';
 import { UserModule } from './user/user.module';
 import { MenuModule } from './menu/menu.module';
+import { PasswordModule } from './password/password.module';
 
 @NgModule({
     declarations : [
@@ -23,7 +24,8 @@ import { MenuModule } from './menu/menu.module';
 
         GroupModule,
         UserModule,
-        MenuModule
+        MenuModule,
+        PasswordModule
     ],
     providers : []
 })

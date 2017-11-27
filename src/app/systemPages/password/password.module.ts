@@ -4,12 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
+import { PasswordComponent } from './password';
+
 @NgModule({
     declarations : [
-        
+        PasswordComponent
     ],
     exports : [
-        
+        PasswordComponent
+    ],
+    entryComponents : [
+
     ],
     imports : [
         CommonModule,
@@ -19,4 +24,4 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
     ],
     providers : []
 })
-export class PagesModule{}
+export class PasswordModule{}
