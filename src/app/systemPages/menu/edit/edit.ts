@@ -58,6 +58,10 @@ export class EditComponent {
             this.error.name_error = "请填写菜单名";
             return ;
         }
+        if(JSON.stringify(this.menu) == JSON.stringify(this.data)){
+            this._message.error("没有数据被更改");
+            return ;
+        }
         this.isLoading = true;
         this.dataService.postData("/system/MenuCtl/editMenu",{
             id : this.data.id,
