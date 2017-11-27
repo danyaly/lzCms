@@ -40,7 +40,7 @@ export class UserComponent {
     /*改变一个角色的状态*/
     changeUserMode(user){
         this.modalService.confirm({
-            title  : '您是否确认要' + (user.deleted ? "恢复" : "禁用") + '这个用户',
+            title  : '您是否确认要' + (user.deleted ? "恢复" : "禁用") + '这个用户吗？',
             content: '',
             showConfirmLoading: true,
             onOk: ()=>{
@@ -49,7 +49,7 @@ export class UserComponent {
                     deleted : user.deleted ? 0 : 1
                 }).then(res => {
                     if(res.status == "success"){
-                        this._message.success( (user.deleted ? "恢复" : "禁用") + "角色成功",{nzDuration : 1500});
+                        this._message.success( (user.deleted ? "恢复" : "禁用") + "用户成功",{nzDuration : 1500});
                         this.getData();
                     }else{
                         this._message.error(res.msg,{nzDuration : 1500});
@@ -69,7 +69,7 @@ export class UserComponent {
             onOk: ()=>{
                 this.dataService.postData("/system/UserCtl/deleteUser",{id:userId}).then(res => {
                     if(res.status == "success"){
-                        this._message.success("删除角色成功",{nzDuration : 1500});
+                        this._message.success("删除用户成功",{nzDuration : 1500});
                         this.getData();
                     }else{
                         this._message.error(res.msg,{nzDuration : 1500});

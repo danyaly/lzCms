@@ -6,6 +6,7 @@ import { GetDataService } from '../../library/getDataService/getDataService';
 
 import { CreateComponent } from './create/create';
 import { MenuComponent } from './menu/menu';
+import { EditComponent } from './edit/edit';
 
 @Component({
     templateUrl : 'group.html',
@@ -34,6 +35,29 @@ export class GroupComponent {
                 this._message.error(res.message);
             }
         })
+    }
+
+    /*修改一个角色的状态*/
+    changeGroupMode(group){
+        this.modalService.confirm({
+            title  : '您是否确认要' + (group.deleted ? "恢复" : "禁用") + '这个角色吗？',
+            content: '',
+            showConfirmLoading: true,
+            onOk: ()=>{
+                this.dataService.postData("/system/GroupCtl/changeGroupMode",{
+                    id : group.id,
+                    deleted : group.deleted ? 0 : 1
+                }).then(res => {
+                    if(res.status == "success"){
+                        this._message.success( (group.deleted ? "恢复" : "禁用") + "角色成功",{nzDuration : 1500});
+                        this.getData();
+                    }else{
+                        this._message.error(res.msg,{nzDuration : 1500});
+                    }
+                })
+            },
+            onCancel() {}
+        });
     }
 
     /*删除一个角色*/
@@ -66,6 +90,24 @@ export class GroupComponent {
             },
             footer : false,
             componentParams: {}
+        });
+        subscription.subscribe(result => {
+            
+        })
+    }
+
+    /*显示编辑角色组件*/
+    editGroup(group){
+        const subscription = this.modalService.open({
+            title : '编辑角色',
+            content : EditComponent,
+            onOk : () => {
+                this.getData();
+            },
+            footer : false,
+            componentParams: {
+                group : group
+            }
         });
         subscription.subscribe(result => {
             

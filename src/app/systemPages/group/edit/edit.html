@@ -1,0 +1,22 @@
+<div class="create_container">
+    <div class="content_container">
+        <div nz-row class="form_single_line">
+            <div nz-col [nzSpan]="4" class="form_single_line_title">角色名：</div>
+            <div nz-col [nzSpan]="20">
+                <nz-input [(ngModel)]="data.name" (nzFocus)="error.name=''" [class.error]="error.name" [nzPlaceHolder]="'请输入角色名称'"></nz-input>
+            </div>
+        </div>
+        <div nz-row class="form_single_line">
+            <div nz-col [nzSpan]="4"></div>
+            <div nz-col [nzSpan]="20" class="error_tip">{{error.name}}</div>
+        </div>
+    </div>
+    <div class="customize-footer">
+        <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleSave($event)" [nzLoading]="isLoading">
+            保 存
+        </button>
+        <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+            返 回
+        </button>
+    </div>
+</div>

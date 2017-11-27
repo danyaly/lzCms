@@ -7,19 +7,22 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { GroupComponent } from './group';
 import { CreateComponent } from './create/create';
 import { MenuComponent } from './menu/menu';
+import { EditComponent } from './edit/edit';
 
 @NgModule({
     declarations : [
         GroupComponent,
         CreateComponent,
-        MenuComponent
+        MenuComponent,
+        EditComponent
     ],
     exports : [
         GroupComponent
     ],
     entryComponents : [
         CreateComponent,
-        MenuComponent
+        MenuComponent,
+        EditComponent
     ],
     imports : [
         CommonModule,
