@@ -12,6 +12,7 @@ export class EditComponent {
     @Input() menu;
 
     public isLoading = false;
+    public data:any = {};
     public error = {
         name_error : "",
         link_error : ""
@@ -23,7 +24,12 @@ export class EditComponent {
         private dataService: GetDataService,
         private subject: NzModalSubject,
         private _message: NzMessageService
-    ) {
+    ) {}
+
+    ngOnInit(){
+        for(let x in this.menu){
+            this.data[x] = this.menu[x];
+        }
         this.getFirstLevelList();
     }
 
@@ -47,19 +53,19 @@ export class EditComponent {
     }
 
     handleSave($event){
-        this.menu.name = this.menu.name.replace(/\s+/g,"");
-        if(!this.menu.name){
+        this.data.name = this.data.name.replace(/\s+/g,"");
+        if(!this.data.name){
             this.error.name_error = "请填写菜单名";
             return ;
         }
         this.isLoading = true;
         this.dataService.postData("/system/MenuCtl/editMenu",{
-            id : this.menu.id,
-            name : this.menu.name,
-            link : this.menu.link,
-            pid : this.menu.pid,
-            orders : this.menu.orders,
-            icon : this.menu.icon
+            id : this.data.id,
+            name : this.data.name,
+            link : this.data.link,
+            pid : this.data.pid,
+            orders : this.data.orders,
+            icon : this.data.icon
         }).then(res => {
             this.isLoading = false;
             if(res.status == "success"){
