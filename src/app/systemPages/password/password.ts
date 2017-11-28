@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { trigger,transition,style,animate,state } from '@angular/animations';
+import { NzModalService , NzMessageService } from 'ng-zorro-antd';
 
 import * as md5 from 'md5';
 import { GetDataService } from '../../library/getDataService/getDataService';
@@ -18,22 +19,10 @@ import { GetDataService } from '../../library/getDataService/getDataService';
 })
 export class PasswordComponent {
 
-    public saveUrl:string = "index/index/changePwd";
-
-    public status:number = 1;
-
     public dataModel = {
         oldPwd : "",
         newPwd : "",
         reNewPwd : ""
-    }
-
-    public statusType(){
-        return {
-            "btn-info" : this.status == 1,
-            "btn-success" : this.status == 2,
-            "btn-danger" : this.status == 3
-        };
     }
 
     public errorStatus = {
@@ -43,9 +32,10 @@ export class PasswordComponent {
     }
     public errorTip:string = "";
 
-    public saveTip:string = "保存";
-
-    constructor(private dataService: GetDataService) {}
+    constructor(
+        private dataService: GetDataService,
+        private _message: NzMessageService
+    ) {}
 
     public myFocus(){
         this.errorTip = "";
@@ -55,10 +45,6 @@ export class PasswordComponent {
     }
 
     public savePwd(){
-        //确认按钮状态
-        if(this.status != 1){
-            return ;
-        }
         //排除空格
         this.dataModel.oldPwd = this.dataModel.oldPwd.replace(/\s+/g,"");
         this.dataModel.newPwd = this.dataModel.newPwd.replace(/\s+/g,""); 
@@ -93,18 +79,11 @@ export class PasswordComponent {
             newPwd : md5(this.dataModel.newPwd)
         }
 
-        this.dataService.postData(this.saveUrl,data).then((result)=>{
-            if(result.status == 0){
-                this.status = 2;
-                this.saveTip = "修改成功";
+        this.dataService.postData("system/UserCtl/changePwd" , data).then((result)=>{
+            if(result.status == "success"){
+                this._message.success("修改成功",{nzDuration : 1500});
             }else{
-                if(result.status == 9){
-                    this.errorStatus.oldPwd = true;
-                    this.errorTip = "原密码错误";
-                }
-                this.status = 3;
-                this.saveTip = "修改失败";
-                setTimeout(()=>{this.status = 1;this.saveTip = "保存";},2000);
+                this._message.error(result.msg,{nzDuration : 1500});
             }
         })
     }
